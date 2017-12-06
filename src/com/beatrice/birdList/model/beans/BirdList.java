@@ -1,7 +1,6 @@
 package com.beatrice.birdList.model.beans;
 
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -12,31 +11,33 @@ import com.beatrice.birdList.model.util.BirdListUtil;
 @XmlRootElement
 public class BirdList {
 	
-	private List<Bird> list;
+	private List<Bird> listOfBirds;
 	private String birdListId;
 	private Date creationDate;
 	private String birdListName;
+	private int ownerId;
+	private String timePeriod;
+	private String place;
 	
 	public BirdList() {
-		creationDate = new Date(); //TODO
+		creationDate = new Date();
 		initBirdList();
 		birdListId = Integer.toString(BirdListUtil.getBirdListIdIncrement());
 	}
 
 	private void initBirdList() {
-		list = BirdListUtil.getStandardListSw();
+		listOfBirds = BirdListUtil.getStandardListSw();
 	}
 
-	public List<Bird> getList() {
-		return list;
+	public List<Bird> getListOfBirds() {
+		return listOfBirds;
 	}
 
-	public void setList(List<Bird> list) {
-		this.list = list;
-		for (Bird bird : list) {
+	public void setListOfBirds(List<Bird> listOfBirds) {
+		this.listOfBirds = listOfBirds;
+		for (Bird bird : listOfBirds) {
 			System.out.println(bird.getName());
-		}
-		
+		}	
 	}
 
 	public Date getCreationDate() {
@@ -54,6 +55,14 @@ public class BirdList {
 
 	public void setBirdListName(String birdListName) {
 		this.birdListName = birdListName;
+	}
+
+	public int getOwnerId() {
+		return ownerId;
+	}
+
+	public void setOwnerId(int ownerId) {
+		this.ownerId = ownerId;
 	}
 	
 	

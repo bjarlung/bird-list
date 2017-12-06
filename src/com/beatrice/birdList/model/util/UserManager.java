@@ -9,6 +9,9 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 import com.beatrice.birdList.model.beans.User;
+import com.beatrice.birdList.model.database.birdList.WatchersRepository;
+import com.beatrice.birdList.model.database.user.UserRepoJDBC;
+import com.beatrice.birdList.model.database.user.UserRepository;
 
 @SessionScoped
 @ManagedBean
@@ -16,6 +19,8 @@ public class UserManager implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private static User currentUser;
+	
+	private UserRepository userRepo = new UserRepoJDBC();
 	
 	public boolean isLoggedIn() {
 		return currentUser != null;
@@ -31,32 +36,30 @@ public class UserManager implements Serializable {
 	}
 	
 	public String signIn(String username, String password) {
-		System.out.println("in signIn in userManager");
-		currentUser = new User();
-		System.out.println(currentUser.toString());
-		currentUser.setUsername(username);
-		
-		return "WEB-INF/profile";
-		//TODO
-//		if(username.equals("abc") && password.equals("123")) {
-//			currentUser = new User();
-//			currentUser.setUsername(username);
-//			System.out.println("in if in signIn");
-//			return "profile?faces-redirect=true";
-//		} else {
-//			FacesMessage message = new FacesMessage("Invalid credentials");
-//			FacesContext context = FacesContext.getCurrentInstance();
-//			//null för då skickas den globalt
-//			context.addMessage(null, message);
-//			return "index";
-//		}
+		currentUser = userRepo.getUser(username, password);
+		if(currentUser != null) {
+			return "WEB-INF/profile";
+		} else {
+			FacesMessage message = new FacesMessage("Invalid credentials");
+			FacesContext context = FacesContext.getCurrentInstance();
+			//null för då skickas den globalt
+			context.addMessage(null, message);
+			return "index";
+		}	
 		
 	}
 
-	public User signUp(User user) {
-		
-		
-		return user;
+	public String signUp(User user, String password) {
+		currentUser = userRepo.addUser(user, password);	
+		if(currentUser != null) {
+			return "WEB-INF/profile";
+		} else {
+			FacesMessage message = new FacesMessage("Invalid credentials");
+			FacesContext context = FacesContext.getCurrentInstance();
+			//null för då skickas den globalt
+			context.addMessage(null, message);
+			return "register";
+		}
 	}
 	
 	public User getCurrentUser() {

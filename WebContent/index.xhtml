@@ -15,22 +15,24 @@
 	</h:head>
 	<h:body>
 	<h:form>
-			<h:outputLabel value="Username: " for="username"/>
-			<h:inputText id="username" a:placeholder="What's you username" value="#{signInHandler.username}">
-				<f:validateLength minimum="3" maximum="20"/>
-			</h:inputText>
-			<h:message for="username" styleClass="error"/>	
-			<br/><br/>
-			<h:outputLabel value="Password: " for="password"/>
-			<h:inputSecret id="password" a:placeholder="What's you password" value="#{signInHandler.password}">
-				<f:validateLength minimum="3" maximum="20"/>
-			</h:inputSecret>
-			<h:message for="password" styleClass="error"/>
-			<br/><br/>
+		<h:messages golbalOnly="true"/>
+		<h:outputLabel value="Username: " for="username"/>
+		<h:inputText id="username" a:placeholder="What's you username" value="#{signInHandler.username}">
+			<f:validateLength minimum="3" maximum="20"/>
+		</h:inputText>
+		<h:message for="username" styleClass="error"/>	
+		<br/><br/>
+		<h:outputLabel value="Password: " for="password"/>
+		<h:inputSecret id="password" a:placeholder="What's you password" value="#{signInHandler.password}">
+			<f:validateLength minimum="3" maximum="20"/>
+		</h:inputSecret>
+		<h:message for="password" styleClass="error"/>
+		<br/><br/>
 			
-			<h:commandButton value="submit" action="#{signInHandler.submit}"/>
+		<h:commandButton value="submit" action="#{signInHandler.submit}"/>
 	</h:form>
 	
+	<h:link value = "Registrera dig" outcome = "register"/>
 
 	</h:body>
 </html>

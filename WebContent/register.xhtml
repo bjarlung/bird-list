@@ -7,27 +7,29 @@
 <h:head>
 	<meta charset="UTF-8" />
 	<title>New user</title>
+	<style> .error {color:red} </style>
 </h:head>
 
 <h:body>
 	<h1>Registrera dig</h1>
 	<h:form>
-		Förnamn: <h:inputText id="firstName" value="#{user.firstName}"
+		<h:messages golbalOnly="true"/>
+		Förnamn: <h:inputText id="firstName" value="#{signUpHandler.firstName}"
 			a:placeholder="Ditt förnamn" />
 		<br />
 		<br />
-		Efternamn: <h:inputText id="lastName" value="#{user.lastName}"
+		Efternamn: <h:inputText id="lastName" value="#{signUpHandler.lastName}"
 			a:placeholder="Ditt efternamn" />
 		<br />
 		<br />
 		<h:outputLabel value="Username: " for="username"/>
-			<h:inputText id="username" a:placeholder="What's you username" value="#{signInHandler.username}">
+			<h:inputText id="username" a:placeholder="Select a username" value="#{signUpHandler.username}">
 				<f:validateLength minimum="3" maximum="20"/>
 			</h:inputText>
 			<h:message for="username" styleClass="error"/>	
 			<br/><br/>
 			<h:outputLabel value="Password: " for="password"/>
-			<h:inputSecret id="password" a:placeholder="What's you password" value="#{signInHandler.password}">
+			<h:inputSecret id="password" a:placeholder="Select a password" value="#{signUpHandler.password}">
 				<f:validateLength minimum="3" maximum="20"/>
 			</h:inputSecret>
 			<h:message for="password" styleClass="error"/>
@@ -35,7 +37,7 @@
 
 		<br />
 		<br />
-		<h:commandButton value="Registrera" action="WEB-INF/profile" />
+		<h:commandButton value="Registrera" action="#{signUpHandler.submit}" />
 
 	</h:form>
 </h:body>

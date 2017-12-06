@@ -1,4 +1,4 @@
-package com.beatrice.birdList.model.database;
+package com.beatrice.birdList.model.database.birdList;
 
 import org.bson.Document;
 
@@ -10,12 +10,14 @@ import com.mongodb.client.MongoDatabase;
 public class MongoDB {
 	private static MongoDB instance;
 	private MongoCollection<Document> collection;
+	private MongoCollection<Document> userCollection;
 	private MongoClient mongo;
 	
 	private MongoDB() {
 		mongo = new MongoClient("localhost", 27017);
 		MongoDatabase mongoDatabase = mongo.getDatabase("birdListDB");
 		collection = mongoDatabase.getCollection("birdList");
+		userCollection = mongoDatabase.getCollection("user");
 	}
 
 	public static MongoDB getInstance() {
@@ -27,6 +29,10 @@ public class MongoDB {
 	
 	public MongoCollection<Document> getDatabase() {
 		return collection;
+	}
+	
+	public MongoCollection<Document> getUserDatabase() {
+		return userCollection;
 	}
 	
 	public void closeConnection() {

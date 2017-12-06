@@ -1,34 +1,35 @@
 package com.beatrice.birdList.model.beans;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.context.SessionScoped;
-import javax.faces.bean.ManagedBean;
-import javax.inject.Named;
-
 import com.beatrice.birdList.model.util.BirdListUtil;
 
-@SessionScoped
-@ManagedBean
-public class User implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+
+public class User {
+	
+	private int userId;
 	private String username;
 	private String firstName;
 	private String lastName;
+	private List<BirdList> birdListCollection;
 	private List<Bird> birdList;
 	
 	public User() {
 		System.out.println("Creating new user, user constructor");
-		birdList = BirdListUtil.getStandardListSw();
-		for (Bird bird : birdList) {
-			System.out.println(bird.getName());
-		}
-		
+		birdListCollection = new ArrayList<>();
+//		birdList = BirdListUtil.getStandardListSw();
+//		for (Bird bird : birdList) {
+//			System.out.println(bird.getName());
+//		}
+	}
+	
+	public List<BirdList> getBirdListCollection() {
+		return birdListCollection;
+	}
+
+	public void setBirdListCollection(List<BirdList> birdListCollection) {
+		this.birdListCollection = birdListCollection;
 	}
 
 	public String getUsername() {
@@ -61,6 +62,14 @@ public class User implements Serializable {
 
 	public void setBirdList(List<Bird> birdList) {
 		this.birdList = birdList;
+	}
+	
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 	@Override

@@ -4,6 +4,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import com.beatrice.birdList.model.beans.User;
 import com.beatrice.birdList.model.util.UserManager;
 
 @RequestScoped
@@ -16,6 +17,15 @@ public class SignUpHandler {
 	
 	@Inject
 	private UserManager userManager;
+	
+	public String submit() {
+		User user = new User();
+		user.setUsername(username);
+		user.setFirstName(firstName);
+		user.setLastName(lastName);
+		System.out.println("in submit,signUpHandler username: " + username + " Password: " + password) ;
+		return userManager.signUp(user, password);
+	}
 	
 	public String getUsername() {
 		return username;
