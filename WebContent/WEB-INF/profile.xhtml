@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+		xmlns:h="http://xmlns.jcp.org/jsf/html"
+		xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+<meta charset="UTF-8"/>
+<title>Profil</title>
+<h:outputStylesheet library="css" name="bird_table.css"/>
+</h:head>
+
+<h:body>
+	Välkommen, #{user.firstName} #{user.lastName} 
+	<br/>
+	
+	<h:dataTable value="#{user.birdList}" var="bird" 
+		styleClass="table" 
+		headerClass="table-header" 
+		rowClasses="table-odd-row, table-even-row">
+		<h:column>
+			<f:facet name="header">Seen</f:facet>
+			<h:selectBooleanCheckbox value="#{bird.spotted}"/>
+		</h:column>
+		<h:column>
+			<f:facet name="header">Bird name</f:facet>
+			#{bird.name}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Spotted</f:facet>
+			#{bird.spotted}
+		</h:column>
+		<h:column>
+			<f:facet name="header">Date</f:facet>
+			#{bird.date.toString()}
+		</h:column>
+	
+	
+	</h:dataTable>
+	
+	
+	
+	
+</h:body>
+</html>

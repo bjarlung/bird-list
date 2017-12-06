@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<meta charset="UTF-8" />
+	<title>New user</title>
+</h:head>
+
+<h:body>
+	<h1>Registrera dig</h1>
+	<h:form>
+		Förnamn: <h:inputText id="firstName" value="#{user.firstName}"
+			a:placeholder="Ditt förnamn" />
+		<br />
+		<br />
+		Efternamn: <h:inputText id="lastName" value="#{user.lastName}"
+			a:placeholder="Ditt efternamn" />
+		<br />
+		<br />
+		<h:outputLabel value="Username: " for="username"/>
+			<h:inputText id="username" a:placeholder="What's you username" value="#{signInHandler.username}">
+				<f:validateLength minimum="3" maximum="20"/>
+			</h:inputText>
+			<h:message for="username" styleClass="error"/>	
+			<br/><br/>
+			<h:outputLabel value="Password: " for="password"/>
+			<h:inputSecret id="password" a:placeholder="What's you password" value="#{signInHandler.password}">
+				<f:validateLength minimum="3" maximum="20"/>
+			</h:inputSecret>
+			<h:message for="password" styleClass="error"/>
+			<br/><br/>
+
+		<br />
+		<br />
+		<h:commandButton value="Registrera" action="WEB-INF/profile" />
+
+	</h:form>
+</h:body>
+</html>
