@@ -4,6 +4,11 @@
 		xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 		xmlns:h="http://xmlns.jcp.org/jsf/html"
 		xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:metadata>
+	<f:event listener="#{profileHandler.loadBirdLists()}" type="preRenderView"></f:event>
+</f:metadata>		
+		
+		
 <h:head>
 	<meta charset="UTF-8"/>
 	<title>Profil</title>
@@ -14,7 +19,7 @@
 	Välkommen, #{user.firstName} #{user.lastName} 
 	<br/>
 	
-	<h:dataTable value="#{user.birdList}" var="bird" 
+	<h:dataTable value="#{profileHandler.listOfBirds}" var="bird" 
 		styleClass="table" 
 		headerClass="table-header" 
 		rowClasses="table-odd-row, table-even-row">

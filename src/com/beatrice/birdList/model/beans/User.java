@@ -13,7 +13,7 @@ public class User {
 	private String firstName;
 	private String lastName;
 	private List<BirdList> birdListCollection;
-	private List<Bird> birdList;
+	//private List<Bird> birdList;
 	
 	public User() {
 		System.out.println("Creating new user, user constructor");
@@ -56,13 +56,13 @@ public class User {
 		this.lastName = lastName;
 	}
 
-	public List<Bird> getBirdList() {
-		return birdList;
-	}
-
-	public void setBirdList(List<Bird> birdList) {
-		this.birdList = birdList;
-	}
+//	public List<Bird> getBirdList() {
+//		return birdList;
+//	}
+//
+//	public void setBirdList(List<Bird> birdList) {
+//		this.birdList = birdList;
+//	}
 	
 	public int getUserId() {
 		return userId;
@@ -75,7 +75,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [username=" + username + ", firstName=" + firstName + ", lastName=" + lastName + ", birdList="
-				+ birdList + "]";
+				+ birdListCollection.get(0) + "]";
 	}
 
 	

@@ -2,9 +2,11 @@ package com.beatrice.birdList.model.beans;
 
 import java.util.Date;
 
+import javax.enterprise.context.SessionScoped;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
+@SessionScoped
 @XmlRootElement
 public class Bird {
 	private String name;
@@ -60,6 +62,12 @@ public class Bird {
 
 	public void setId(String birdId) {
 		this.birdId = birdId;
+	}
+
+	@Override
+	public String toString() {
+		return "Bird [name=" + name + ", birdId=" + birdId + ", spotted=" + spotted + ", date=" + date + ", comment="
+				+ comment + "]";
 	}
 	
 	

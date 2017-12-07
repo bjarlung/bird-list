@@ -64,6 +64,13 @@ public class BirdList {
 	public void setOwnerId(int ownerId) {
 		this.ownerId = ownerId;
 	}
+
+	@Override
+	public String toString() {
+		return "BirdList [listOfBirds=" + listOfBirds + ", birdListId=" + birdListId + ", creationDate=" + creationDate
+				+ ", birdListName=" + birdListName + ", ownerId=" + ownerId + ", timePeriod=" + timePeriod + ", place="
+				+ place + "]";
+	}
 	
 	
 	

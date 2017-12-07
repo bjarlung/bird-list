@@ -1,6 +1,7 @@
 package com.beatrice.birdList.model.util;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
@@ -8,7 +9,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
+import com.beatrice.birdList.model.beans.BirdList;
 import com.beatrice.birdList.model.beans.User;
+import com.beatrice.birdList.model.database.birdList.WatchersRepoMongo;
 import com.beatrice.birdList.model.database.birdList.WatchersRepository;
 import com.beatrice.birdList.model.database.user.UserRepoJDBC;
 import com.beatrice.birdList.model.database.user.UserRepository;
@@ -21,6 +24,7 @@ public class UserManager implements Serializable {
 	private static User currentUser;
 	
 	private UserRepository userRepo = new UserRepoJDBC();
+	private WatchersRepository birdRepo = new WatchersRepoMongo();
 	
 	public boolean isLoggedIn() {
 		return currentUser != null;
@@ -62,6 +66,19 @@ public class UserManager implements Serializable {
 		}
 	}
 	
+	public void updateUsersBirdLists() {
+//		BirdList birdList = new BirdList();
+//		System.out.println("user id in updateBirdLists: " + currentUser.getUserId());
+//		birdList.setOwnerId(currentUser.getUserId());
+//		birdList.setBirdListName("Jans livslista");
+//		birdRepo.addBirdList(birdList);
+		
+		List<BirdList> birdListCollection = birdRepo.getBirdListsByUser(currentUser.getUserId());
+		System.out.println("after get collection: " + birdListCollection);
+		currentUser.setBirdListCollection(birdListCollection);
+		System.out.println("after get birdlist, user manager: " + currentUser.getBirdListCollection());
+	}
+	
 	public User getCurrentUser() {
 		return currentUser;
 	}
@@ -69,6 +86,5 @@ public class UserManager implements Serializable {
 	public void setCurrentUser(User currentUser) {
 		UserManager.currentUser = currentUser;
 	}
-	
 	
 }
