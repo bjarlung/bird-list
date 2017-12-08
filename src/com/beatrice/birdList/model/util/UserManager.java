@@ -17,7 +17,7 @@ import com.beatrice.birdList.model.database.user.UserRepoJDBC;
 import com.beatrice.birdList.model.database.user.UserRepository;
 
 @SessionScoped
-@ManagedBean
+@Named
 public class UserManager implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -66,18 +66,8 @@ public class UserManager implements Serializable {
 		}
 	}
 	
-	public void updateUsersBirdLists() {
-//		BirdList birdList = new BirdList();
-//		System.out.println("user id in updateBirdLists: " + currentUser.getUserId());
-//		birdList.setOwnerId(currentUser.getUserId());
-//		birdList.setBirdListName("Jans livslista");
-//		birdRepo.addBirdList(birdList);
-		
-		List<BirdList> birdListCollection = birdRepo.getBirdListsByUser(currentUser.getUserId());
-		System.out.println("after get collection: " + birdListCollection);
-		currentUser.setBirdListCollection(birdListCollection);
-		System.out.println("after get birdlist, user manager: " + currentUser.getBirdListCollection());
-	}
+
+	
 	
 	public User getCurrentUser() {
 		return currentUser;

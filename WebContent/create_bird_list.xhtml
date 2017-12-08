@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta charset="UTF-8" />
+	<title>ny lista</title>
+	<style> .error {color:red} </style>
+</h:head>
+
+<h:body>
+	<h1>Skapa ny lista</h1>
+	<h:form>
+		<h:outputLabel for="listName" value="Listnamn: "/>
+		<p:inputText id="listName" value="#{newListHandler.listName}"/>
+		<p:commandButton value="Skapa" action="#{newListHandler.create}"/>
+	
+	</h:form>
+</h:body>
+</html>
