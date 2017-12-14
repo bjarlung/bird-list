@@ -5,7 +5,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.beatrice.birdList.model.util.UserManager;
+import com.beatrice.birdList.model.manager.UserManager;
 
 
 @RequestScoped

@@ -17,39 +17,101 @@
 </h:head>
 
 <h:body>
-	<h1>Dina krysslistor!</h1>
+	<h1>Krysslistor</h1>
 	
 	<br/>
 	<p:button outcome="/create_bird_list" value="+ Ny lista" styleClass="ui-priority-primary">
 	</p:button>
+	
 	<br/><br/>
-	
-	
-	<h:dataTable value="#{birdListManager.listOfBirds}" var="bird" 
+    <h:form>
+	<h:dataTable id="birdTable" value="#{birdTableHandler.listOfBirds}" var="bird" 
 		styleClass="table" 
 		headerClass="table-header" 
 		rowClasses="table-odd-row, table-even-row">
 		<h:column>
-			<f:facet name="header">Seen</f:facet>
-			<h:selectBooleanCheckbox value="#{bird.spotted}"/>
+			<f:facet name="header">Kryssad</f:facet>
+			<p:selectBooleanCheckbox value="#{birdTableHandler.selectedBird}" valueChangeListener="birdTableHandler.toggleSeen}">
+				<p:ajax value="#{bird}" listener="#{birdTableHandler.selectedBird}" update="birdTable"/>
+			</p:selectBooleanCheckbox>
 		</h:column>
 		<h:column>
-			<f:facet name="header">Bird name</f:facet>
+			<f:facet name="header">Fågel</f:facet>
 			#{bird.name}
 		</h:column>
 		<h:column>
-			<f:facet name="header">Spotted</f:facet>
+			<f:facet name="header">Kryssad</f:facet>
 			#{bird.spotted}
 		</h:column>
 		<h:column>
-			<f:facet name="header">Date</f:facet>
+			<f:facet name="header">Datum</f:facet>
 			#{bird.date.toString()}
+		</h:column>	
+		<h:column>
+			<f:facet name="header">Ändra</f:facet>
+			<h:commandLink value="Uppdatera" action="#{birdListManager.loadBird(bird.name)}"></h:commandLink>
 		</h:column>
-	
-	
 	</h:dataTable>
+	</h:form>
 	
-
+	<p:button outcome="/add_bird_form" value="+ Lägg till fågel" styleClass="addBirdButton"/>
+ <!-- <br/><br/><br/><br/>
+ 
+ 	<br/><br/>
+	
+	<h:form id="form">
+    <p:growl id="msgs" showDetail="true" />
+ 
+    <p:dataTable id="basicDT" var="bird" value="#{birdTableHandler.listOfBirds}">
+        <f:facet name="header">
+            Basic
+        </f:facet>
+        <p:column headerText="Id">
+            <h:outputText value="#{bird.name}" />
+        </p:column>
+       <p:column headerText="Year">
+            <h:outputText value="#{bird.date}" />
+        </p:column>
+        <p:column headerText="Brand">
+            <h:outputText value="#{bird.spotted}" />
+        </p:column>
+        <p:column headerText="Color">
+            <h:outputText value="#{bird.comment}" />
+        </p:column>
+        <p:column style="width:32px;text-align: center">
+             <p:commandButton update=":form:carDetail" oncomplete="PF('carDialog').show()" icon="ui-icon-search" title="View"
+             					action="birdTableHandler.setSelectedBird(bird)">
+                <f:setPropertyActionListener value="#{bird}" target="#{birdTableHandler.selectedBird}" />
+            </p:commandButton>
+            <p:button></p:button>
+        </p:column>
+    </p:dataTable>
+    
+    
+    <p:dialog header="Car Info" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="true">
+        <p:outputPanel id="carDetail" style="text-align:center;">
+        #{not empty birdTableHandler.selectedBird}
+            <p:panelGrid  columns="2" rendered="#{not empty birdTableHandler.selectedBird}" columnClasses="label,value">
+                <f:facet name="header">
+                    
+                </f:facet>
+ 
+                <h:outputText value="Id:" />
+                <h:outputText value="#{birdHandler.selectedBird.birdId}" />
+ 
+                <h:outputText value="Year" />
+                <h:outputText value="#{birdHandler.selectedBird.name}" />
+ 
+                <h:outputText value="Color:" />
+                <h:outputText value="#{dtSelectionView.selectedCar.color}" style="color:#{dtSelectionView.selectedCar.color}"/>
+ 
+                <h:outputText value="Price" />
+                <h:outputText value="$#{dtSelectionView.selectedCar.price}" />
+            </p:panelGrid>
+        </p:outputPanel>
+    </p:dialog>
+    
+    </h:form> -->
 	
 </h:body>
 </html>

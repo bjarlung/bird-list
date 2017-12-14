@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta charset="UTF-8" />
+	<title>ny fågel</title>
+	<style> .error {color:red} </style>
+	<h:outputStylesheet library="css" name="bird_table.css"></h:outputStylesheet>
+</h:head>
+
+<h:body>
+	<h1>Lägg till fågel i listan</h1>
+	<h:form>
+		<h:outputLabel for="listName" value="Fågelnamn: "/>
+		<p:inputText id="listName" value="#{addBirdHandler.birdName}"/>
+		<p:commandButton styleClass="button" value="Lägg till" action="#{addBirdHandler.addBird()}"/>
+	
+	</h:form>
+</h:body>
+</html>

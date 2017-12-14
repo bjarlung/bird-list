@@ -1,4 +1,4 @@
-package com.beatrice.birdList.model.database.birdList;
+package com.beatrice.birdList.model.database;
 
 import org.bson.Document;
 

@@ -1,28 +1,33 @@
 package com.beatrice.birdList.model.beans;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.enterprise.context.SessionScoped;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.beatrice.birdList.model.util.BirdListUtil;
 
+@SessionScoped
 @XmlRootElement
-public class BirdList {
+public class BirdList implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3941600695037857157L;
 	private List<Bird> listOfBirds;
-	private String birdListId;
 	private Date creationDate;
 	private String birdListName;
-	private int ownerId;
 	private String timePeriod;
 	private String place;
 	
 	public BirdList() {
+		System.out.println("Creating new birdList, constructor");
 		creationDate = new Date();
 		initBirdList();
-		birdListId = Integer.toString(BirdListUtil.getBirdListIdIncrement());
 	}
 
 	private void initBirdList() {
@@ -36,7 +41,7 @@ public class BirdList {
 	public void setListOfBirds(List<Bird> listOfBirds) {
 		this.listOfBirds = listOfBirds;
 		for (Bird bird : listOfBirds) {
-			System.out.println(bird.getName());
+			System.out.println("BirdList. setListOfBirds : " + bird.getName());
 		}	
 	}
 
@@ -44,11 +49,7 @@ public class BirdList {
 		return creationDate;
 	}
 
-	@XmlAttribute(name="birdListId")
-	public String getBirdListId() {
-		return birdListId;
-	}
-
+	@XmlAttribute(name="birdListName")
 	public String getBirdListName() {
 		return birdListName;
 	}
@@ -56,19 +57,26 @@ public class BirdList {
 	public void setBirdListName(String birdListName) {
 		this.birdListName = birdListName;
 	}
-
-	public int getOwnerId() {
-		return ownerId;
+	
+	public void addBirdToList(Bird bird) {
+		System.out.println("BirdList. Adding: " + bird.toString());
+		listOfBirds.add(bird);
 	}
-
-	public void setOwnerId(int ownerId) {
-		this.ownerId = ownerId;
+	
+	public Bird getBirdByName(String birdName) {
+		for (Bird bird : listOfBirds) {
+			String tempName = bird.getName();
+			if(tempName.equals(birdName))
+				return bird;
+		}
+		return null;
 	}
+	
 
 	@Override
 	public String toString() {
-		return "BirdList [listOfBirds=" + listOfBirds + ", birdListId=" + birdListId + ", creationDate=" + creationDate
-				+ ", birdListName=" + birdListName + ", ownerId=" + ownerId + ", timePeriod=" + timePeriod + ", place="
+		return "BirdList [listOfBirds=" + listOfBirds + ", creationDate=" + creationDate
+				+ ", birdListName=" + birdListName + ", timePeriod=" + timePeriod + ", place="
 				+ place + "]";
 	}
 	
