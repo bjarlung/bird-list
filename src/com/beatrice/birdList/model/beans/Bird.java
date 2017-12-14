@@ -1,5 +1,6 @@
 package com.beatrice.birdList.model.beans;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.enterprise.context.SessionScoped;
@@ -8,7 +9,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @SessionScoped
 @XmlRootElement
-public class Bird {
+public class Bird implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3582110539574150006L;
 	private String name;
 	private String birdId;	
 	
@@ -16,9 +21,8 @@ public class Bird {
 	private Date date;
 	private String comment;
 	
-	public Bird(String name, String birdId) {
-		this.name = name;
-		this.birdId = birdId;
+	public Bird() {
+		System.out.println("Bird. Creating new bird");
 		spotted = false;
 		date = new Date();
 	}
@@ -52,6 +56,7 @@ public class Bird {
 	}
 
 	public void setName(String name) {
+		System.out.println("Bird. SetName to: " + name);
 		this.name = name;
 	}
 

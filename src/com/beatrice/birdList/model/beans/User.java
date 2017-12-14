@@ -1,27 +1,33 @@
 package com.beatrice.birdList.model.beans;
 
-import java.util.ArrayList;
+import java.io.Serializable;
+
+import java.util.LinkedList;
 import java.util.List;
 
-import com.beatrice.birdList.model.util.BirdListUtil;
+import javax.enterprise.context.SessionScoped;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 
 
-public class User {
+@SessionScoped
+@XmlRootElement
+public class User implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3104055580743760714L;
 	
 	private int userId;
 	private String username;
 	private String firstName;
 	private String lastName;
 	private List<BirdList> birdListCollection;
-	//private List<Bird> birdList;
 	
 	public User() {
 		System.out.println("Creating new user, user constructor");
-		birdListCollection = new ArrayList<>();
-//		birdList = BirdListUtil.getStandardListSw();
-//		for (Bird bird : birdList) {
-//			System.out.println(bird.getName());
-//		}
+		birdListCollection = new LinkedList<>();
 	}
 	
 	public List<BirdList> getBirdListCollection() {
@@ -56,14 +62,16 @@ public class User {
 		this.lastName = lastName;
 	}
 
-//	public List<Bird> getBirdList() {
-//		return birdList;
-//	}
-//
-//	public void setBirdList(List<Bird> birdList) {
-//		this.birdList = birdList;
-//	}
+	public BirdList getCurrentBirdList() {
+		if(birdListCollection.size() > 0) {
+			return birdListCollection.get(birdListCollection.size()-1);
+		} else {
+			System.out.println("User, getCurrentBirdList. No birdList found in users collection");
+			return null;
+		}
+	}
 	
+	@XmlAttribute(name="userId")
 	public int getUserId() {
 		return userId;
 	}
@@ -74,9 +82,10 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [username=" + username + ", firstName=" + firstName + ", lastName=" + lastName + ", birdList="
-				+ birdListCollection.get(0) + "]";
+		return "User [userId=" + userId + ", username=" + username + ", firstName=" + firstName + ", lastName="
+				+ lastName + ", birdListCollection=" + birdListCollection + "]";
 	}
+
 
 	
 	

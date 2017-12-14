@@ -1,4 +1,4 @@
-package com.beatrice.birdList.model.database.user;
+package com.beatrice.birdList.model.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -26,7 +26,7 @@ public class JDBCUtil {
 			Class.forName("com.mysql.jdbc.Driver");
 			connection = DriverManager.getConnection(URL, USER, PASS);
 		} catch (SQLException | ClassNotFoundException e) {
-			System.out.println("In JDBCUtil catch");
+			System.out.println("In JDBCUtil catch, no database found");
 			e.printStackTrace();
 		}
 	}

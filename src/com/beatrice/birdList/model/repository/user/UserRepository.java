@@ -1,4 +1,4 @@
-package com.beatrice.birdList.model.database.user;
+package com.beatrice.birdList.model.repository.user;
 
 import com.beatrice.birdList.model.beans.User;
 
