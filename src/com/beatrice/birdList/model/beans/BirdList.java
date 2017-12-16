@@ -72,6 +72,14 @@ public class BirdList implements Serializable {
 		return null;
 	}
 	
+	public void updateBirdInList(Bird updatedBird) {
+		System.out.println("BirdList, updateBirdInList with: " + updatedBird);
+		Bird toBeUpdated = getBirdByName(updatedBird.getName());
+		toBeUpdated.setComment(updatedBird.getComment());
+		toBeUpdated.setSpotted(updatedBird.isSpotted());
+		toBeUpdated.setDate(new Date());
+	}
+	
 
 	@Override
 	public String toString() {

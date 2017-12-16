@@ -14,13 +14,16 @@
 
 <h:body>
 	<h1>Uppdatera fågel:</h1>
-	<h2>#{bird.name}</h2>
+	<h2>#{editBirdHandler.selectedBird.name}</h2>
 	<br/>
 	<h:form>
 		<h:outputLabel for="check" value="Sedd: "/>
-		<p:selectBooleanCheckbox value="bird.spotted"/>
-		<!-- <p:inputText id="listName" value="#{addBirdHandler.birdName}"/> -->
-		<p:commandButton styleClass="button" value="Uppdatera" action="#{birdListManager.updateBird(bird)}"/>
+		<p:selectBooleanCheckbox value="#{editBirdHandler.selectedBird.spotted}"/>
+		<br/>
+		<h:outputLabel for="comment" value="Kommentar: "/>
+		<p:inputText id="comment" value="#{editBirdHandler.selectedBird.comment}"/>
+		<br/>
+		<p:commandButton styleClass="button" value="Uppdatera" action="#{editBirdHandler.updateBird()}"/>
 	
 	</h:form>
 </h:body>

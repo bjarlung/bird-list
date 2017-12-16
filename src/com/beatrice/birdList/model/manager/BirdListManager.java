@@ -44,13 +44,6 @@ public class BirdListManager implements Serializable {
 		//System.out.println("after get birdlist, birdListManager: " + currentUser.getBirdListCollection());
 	}
 
-	public String loadBird(String birdName) {
-		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-		Map<String, Object> requestMap = context.getRequestMap();
-		Bird bird = userManager.getCurrentUser().getCurrentBirdList().getBirdByName(birdName);
-		requestMap.put("bird", bird);
-		return "edit_bird_form";
-	}
 
 	public String addList(String listName) {
 		User currentUser = userManager.getCurrentUser();
@@ -61,7 +54,7 @@ public class BirdListManager implements Serializable {
 			//currentUser.setBirdList(birdList);
 			currentUser.getBirdListCollection().add(birdList);
 			birdRepo.updateUserLists(currentUser);		
-			return "WEB-INF/profile";
+			return "profile";
 		} else {
 			setNotLoggedIn();	
 			return "register";
@@ -71,7 +64,8 @@ public class BirdListManager implements Serializable {
 	public String updateBird(Bird bird) {
 		User currentUser = userManager.getCurrentUser();
 		if(currentUser != null) {
-
+			System.out.println("updateBird, BirdListManager. Bird: " + bird);
+			BirdList birdList = currentUser.getCurrentBirdList();
 			//			System.out.println("updating bird in BirdListManager");
 			//			List<BirdList> birdListCollection = currentUser.getBirdListCollection();
 			//			if(birdListCollection.size() > 0) {
@@ -81,8 +75,9 @@ public class BirdListManager implements Serializable {
 			//			} else {
 			//				System.out.println("in update Bird, BirdListManager, no list found");
 			//			}
+			birdList.updateBirdInList(bird);
 			birdRepo.updateUserLists(currentUser);		
-			return "WEB-INF/profile";
+			return "profile?faces-redirect=true";
 		} else {
 			setNotLoggedIn();	
 			return "register";
@@ -108,7 +103,7 @@ public class BirdListManager implements Serializable {
 				System.out.println("in adding Bird, BirdListManager, no list found");
 			}
 
-			return "WEB-INF/profile";
+			return "profile";
 		} else {
 			setNotLoggedIn();	
 			return "register";

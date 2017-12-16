@@ -44,7 +44,7 @@ public class UserManager implements Serializable {
 		currentUser = userRepo.getUser(username, password);
 		System.out.println("Signing in userManager, user: " + currentUser);
 		if(currentUser != null) {
-			return "WEB-INF/profile";
+			return "profile";
 		} else {
 			FacesMessage message = new FacesMessage("Invalid credentials");
 			FacesContext context = FacesContext.getCurrentInstance();
@@ -58,7 +58,7 @@ public class UserManager implements Serializable {
 	public String signUp(User user, String password) {
 		currentUser = userRepo.addUser(user, password);	
 		if(currentUser != null) {
-			return "WEB-INF/profile";
+			return "profile";
 		} else {
 			FacesMessage message = new FacesMessage("Invalid credentials");
 			FacesContext context = FacesContext.getCurrentInstance();

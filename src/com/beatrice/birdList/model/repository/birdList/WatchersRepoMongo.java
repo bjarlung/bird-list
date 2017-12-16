@@ -26,8 +26,6 @@ public class WatchersRepoMongo implements WatchersRepository{
 			System.out.println("JsonObj from sync MongoRepo" +jsonObj);
 			User updatedUser = gson.fromJson(jsonObj, User.class);
 			System.out.println("synced user, watchersRepo: " + updatedUser.toString());
-			Document birdListCollection = collection.find(Filters.eq("birdListName", "january")).first();
-			System.out.println("BirdListCollection from Mongo: " + birdListCollection);
 			return updatedUser;
 		}	
 	}
