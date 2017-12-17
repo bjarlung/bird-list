@@ -12,12 +12,12 @@ import javax.inject.Named;
 import com.beatrice.birdList.model.beans.Bird;
 import com.beatrice.birdList.model.beans.BirdList;
 import com.beatrice.birdList.model.beans.User;
-import com.beatrice.birdList.model.repository.birdList.WatchersRepoMongo;
-import com.beatrice.birdList.model.repository.birdList.WatchersRepository;
+import com.beatrice.birdList.model.repository.birdList.BirdersRepoMongo;
+import com.beatrice.birdList.model.repository.birdList.BirdersRepository;
 
 /**
  * Session scoped managed bean
- * Handles communication with WatchersRepository 
+ * Handles communication with BirdersRepository 
  * regarding creation and update of user's birdLists
  * @author Beatrice
  * @since 1.0
@@ -32,7 +32,7 @@ public class BirdListManager implements Serializable {
 	 */
 	private static final long serialVersionUID = 1088747602831838125L;
 
-	private WatchersRepository birdRepo = new WatchersRepoMongo();
+	private BirdersRepository birdersRepo = new BirdersRepoMongo();
 
 	@Inject
 	private UserManager userManager;
@@ -42,8 +42,8 @@ public class BirdListManager implements Serializable {
 	 */
 	public void loadBirdLists() {	
 		User currentUser = userManager.getCurrentUser();
-		userManager.setCurrentUser(birdRepo.sync(currentUser));
-		System.out.println("Loading users bird lists in profileHandler: " + currentUser);
+		userManager.setCurrentUser(birdersRepo.sync(currentUser));
+		System.out.println("Loading users bird lists in birdListManager: " + currentUser);
 	}
 
 	/**
@@ -57,7 +57,7 @@ public class BirdListManager implements Serializable {
 			BirdList birdList = new BirdList();
 			birdList.setBirdListName(listName);
 			currentUser.getBirdListCollection().add(birdList);
-			birdRepo.updateUserLists(currentUser);		
+			birdersRepo.updateUserLists(currentUser);		
 			return "profile";
 		} else {
 			setNotLoggedIn();	
@@ -77,7 +77,7 @@ public class BirdListManager implements Serializable {
 			System.out.println("updateBird, BirdListManager. Bird: " + bird);
 			BirdList birdList = currentUser.getCurrentBirdList();
 			birdList.updateBirdInList(bird);
-			birdRepo.updateUserLists(currentUser);		
+			birdersRepo.updateUserLists(currentUser);		
 			return "profile?faces-redirect=true";
 		} else {
 			setNotLoggedIn();	
@@ -107,7 +107,7 @@ public class BirdListManager implements Serializable {
 			BirdList birdList = currentUser.getCurrentBirdList();
 			if(birdList != null) {
 				birdList.addBirdToList(bird);
-				birdRepo.updateUserLists(currentUser);
+				birdersRepo.updateUserLists(currentUser);
 			} else {
 				System.out.println("in adding Bird, BirdListManager, no list found");
 			}

@@ -8,7 +8,7 @@ import com.beatrice.birdList.model.beans.User;
  * @since 1.0
  *
  */
-public interface WatchersRepository {
+public interface BirdersRepository {
 	User sync(User user);
 	User updateUserLists(User user);
 }
