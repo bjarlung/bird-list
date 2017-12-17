@@ -7,6 +7,13 @@ import javax.inject.Named;
 import com.beatrice.birdList.model.beans.User;
 import com.beatrice.birdList.model.manager.UserManager;
 
+/**
+ * Request scoped managed bean
+ * Handles data from register form
+ * @author Beatrice
+ * @since 1.0
+ *
+ */
 @RequestScoped
 @Named
 public class SignUpHandler {
@@ -18,12 +25,15 @@ public class SignUpHandler {
 	@Inject
 	private UserManager userManager;
 	
+	/**
+	 * Creates new user and sends to userManager to be registered
+	 * @return address redirect
+	 */
 	public String submit() {
 		User user = new User();
 		user.setUsername(username);
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
-		System.out.println("in submit,signUpHandler username: " + username + " Password: " + password) ;
 		return userManager.signUp(user, password);
 	}
 	

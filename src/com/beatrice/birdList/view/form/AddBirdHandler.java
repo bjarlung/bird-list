@@ -8,6 +8,13 @@ import com.beatrice.birdList.model.beans.Bird;
 import com.beatrice.birdList.model.manager.BirdListManager;
 import com.beatrice.birdList.model.util.BirdListUtil;
 
+/**
+ * Request scoped managed bean
+ * Handles data from add_bird_form
+ * @author Beatrice
+ * @since 1.0
+ *
+ */
 @RequestScoped
 @Named
 public class AddBirdHandler {
@@ -25,6 +32,10 @@ public class AddBirdHandler {
 		this.birdName = birdName;
 	}
 	
+	/**
+	 * Creates new bird with chosen name and adds to users birdList through birdListManager
+	 * @return
+	 */
 	public String addBird() {
 		Bird bird = new Bird();
 		bird.setId(Integer.toString(BirdListUtil.getBirdIdIncrement()));

@@ -3,17 +3,31 @@ package com.beatrice.birdList.model.repository.birdList;
 
 import org.bson.Document;
 
-import com.beatrice.birdList.model.beans.BirdList;
 import com.beatrice.birdList.model.beans.User;
 import com.beatrice.birdList.model.database.MongoDB;
+
 import com.google.gson.Gson;
+
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 
-public class WatchersRepoMongo implements WatchersRepository{
+/**
+ * Implements WatchersRepository interface.
+ * Handles communication with MongoDB database
+ * @author Beatrice
+ * @since 1.0
+ *
+ */
+public class WatchersRepoMongo implements WatchersRepository {
+	
 	private Gson gson = new Gson();
 	MongoCollection<Document> collection = MongoDB.getInstance().getDatabase();	
 
+	/**
+	 * Makes sure the program and database data are synced
+	 * Retrieves user from database to update current user in program
+	 * Updates database if the user is not found
+	 */
 	@Override
 	public User sync(User user) {
 		System.out.println("In sync WatchersRepo, user: " + user.toString());
@@ -30,75 +44,43 @@ public class WatchersRepoMongo implements WatchersRepository{
 		}	
 	}
 	
+	/**
+	 * Updates user's bird list collection in database
+	 */
 	@Override
 	public User updateUserLists(User user) {
 		System.out.println("Updating users list, watchersRepo. List: " + gson.toJson(user));
 		Document document = Document.parse(gson.toJson(user));
-		//collection.insertOne(document);
 		collection.updateOne(Filters.eq("username", user.getUsername()), new Document("$set", document));
 		return user;
 	}
 	
+	/**
+	 * Adds new user to database
+	 * @param user
+	 */
 	private void addNewUser(User user) {
 		System.out.println("MongoRepo. Adding new user to DB: " + user.getUsername());
 		Document document = Document.parse(gson.toJson(user));
 		collection.insertOne(document);
 	}
 	
-
+	/**
+	 * Gets specified user from database
+	 * @param user
+	 * @return Document, user in document object
+	 */
 	private Document getUser(User user) {
 		System.out.println("getting user from Mongo in WatchersRepoMongo...");
 		return collection.find(Filters.eq("username", user.getUsername())).first();
 	}
 
-
-
-//	@Override
-//	public User addUser(User user) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-
-	//	@Override
-	//	public BirdList addBirdList(BirdList birdList) {
-	//		if(birdList.getOwnerId() == 0) {
-	//			System.out.println("no owner, WatchersRepo addBirdList");
-	//			return null;
-	//		} else {
-	//			System.out.println("WatchersRepo, addBirdList. Connection to Mongo");	 
-	//			System.out.println("adding birdList named: " + birdList.getBirdListName());	
-	//			Document document = Document.parse(gson.toJson(birdList));
-	//			collection.insertOne(document);
-	////			String birdListId = document.get("_id" ).toString();
-	////			System.out.println("MongoRepo. AddBirdList id set to: " + birdListId);
-	////			birdList.setBirdListId(birdListId);
-	//			return birdList;
-	//		}
-	//	}
-
-	//	@Override
-	//	public BirdList updateBirdList(BirdList birdList) { 
-	//		System.out.println("WatchersRepo updating birdList in DB, id" + birdList.getBirdListId());
-	//		Document document = Document.parse(gson.toJson(birdList));
-	//		collection.updateOne(Filters.eq("birdListName", birdList.getBirdListName()), new Document("$set", document));
-	//		return birdList;
-	//	}
-	//
-	//	@Override
-	//	public boolean deleteBirdList(BirdList birdList) {
-	//		collection.deleteOne(Filters.eq("birdListName", birdList.getBirdListName()));	
-	//		return true;
-	//	}
-
-	
-//	List<BirdList> birdListCollection = new ArrayList<>();
-	//		while(result.hasNext()) {
-	//			String jsonObj = result.next().toJson();
-	//			BirdList birdList = gson.fromJson(jsonObj, BirdList.class);
-	//			System.out.println("getBirdListByUser in mongo repo: " + birdList);
-	//			birdListCollection.add(birdList);
-	//		}
-
-
-
 }
+
+
+//
+//	@Override
+//	public boolean deleteBirdList(BirdList birdList) {
+//		collection.deleteOne(Filters.eq("birdListName", birdList.getBirdListName()));	
+//		return true;
+//	}

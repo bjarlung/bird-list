@@ -1,29 +1,30 @@
 package com.beatrice.birdList.model.beans;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-
-import javax.enterprise.context.SessionScoped;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.beatrice.birdList.model.util.BirdListUtil;
 
-@SessionScoped
+/**
+ * Represents a bird list,
+ * containing a list of Bird-objects and variables as listName and creationDate
+ * @author Beatrice
+ * @since 1.0
+ *
+ */
 @XmlRootElement
-public class BirdList implements Serializable {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -3941600695037857157L;
+public class BirdList {	
+
 	private List<Bird> listOfBirds;
 	private Date creationDate;
 	private String birdListName;
-	private String timePeriod;
-	private String place;
 	
+	/**
+	 * Creating a birdList with default list of birds
+	 * setting creationDate
+	 */
 	public BirdList() {
 		System.out.println("Creating new birdList, constructor");
 		creationDate = new Date();
@@ -63,6 +64,12 @@ public class BirdList implements Serializable {
 		listOfBirds.add(bird);
 	}
 	
+	/**
+	 * Searches listOfBirds for a bird with a specific name
+	 * returns bird object if found
+	 * @param birdName String
+	 * @return 
+	 */
 	public Bird getBirdByName(String birdName) {
 		for (Bird bird : listOfBirds) {
 			String tempName = bird.getName();
@@ -72,6 +79,10 @@ public class BirdList implements Serializable {
 		return null;
 	}
 	
+	/**
+	 * Finds bird in listOfBirds and updates variables according to param
+	 * @param updatedBird Bird. Bird object with updated instance variables
+	 */
 	public void updateBirdInList(Bird updatedBird) {
 		System.out.println("BirdList, updateBirdInList with: " + updatedBird);
 		Bird toBeUpdated = getBirdByName(updatedBird.getName());
@@ -79,14 +90,15 @@ public class BirdList implements Serializable {
 		toBeUpdated.setSpotted(updatedBird.isSpotted());
 		toBeUpdated.setDate(new Date());
 	}
-	
 
 	@Override
 	public String toString() {
-		return "BirdList [listOfBirds=" + listOfBirds + ", creationDate=" + creationDate
-				+ ", birdListName=" + birdListName + ", timePeriod=" + timePeriod + ", place="
-				+ place + "]";
+		return "BirdList [listOfBirds=" + listOfBirds + ", creationDate=" + creationDate + ", birdListName="
+				+ birdListName + "]";
 	}
+	
+
+	
 	
 	
 	

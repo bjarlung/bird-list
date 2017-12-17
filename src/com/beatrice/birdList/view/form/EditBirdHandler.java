@@ -9,12 +9,19 @@ import javax.inject.Named;
 import com.beatrice.birdList.model.beans.Bird;
 import com.beatrice.birdList.model.manager.BirdListManager;
 
+/**
+ * Session scoped managed bean
+ * Handles data from edit_bird_form
+ * @author Beatrice
+ * @since 1.0
+ *
+ */
 @SessionScoped
 @Named
 public class EditBirdHandler implements Serializable {
 	
 	/**
-	 * 
+	 * serial version number for serialization
 	 */
 	private static final long serialVersionUID = 6859142270872371819L;
 	
@@ -23,17 +30,21 @@ public class EditBirdHandler implements Serializable {
 	
 	private Bird selectedBird;
 
+	/**
+	 * Sets selectedBird and returns edit form
+	 * @param bird
+	 * @return
+	 */
 	public String loadBird(Bird bird) {
-		//System.out.println("Loading bird, birdListManager. " + birdName);
 		System.out.println("EditBirdHandler, loadBird. Bird retrieved:" + bird);
 		selectedBird = bird;
-		//ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-		//Map<String, Object> requestMap = context.getRequestMap();
-		//Bird bird = userManager.getCurrentUser().getCurrentBirdList().getBirdByName(birdName);
-		//requestMap.put("bird", bird);
 		return "edit_bird_form";
 	}
 	
+	/**
+	 * Calls birdListManager to update bird
+	 * @return
+	 */
 	public String updateBird() {
 		return birdListManager.updateBird(selectedBird);
 	}
@@ -41,8 +52,5 @@ public class EditBirdHandler implements Serializable {
 	public Bird getSelectedBird() {
 		return selectedBird;
 	}
-	
-	
-	
 
 }

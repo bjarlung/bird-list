@@ -10,7 +10,14 @@ import com.beatrice.birdList.model.beans.Bird;
 
 import com.beatrice.birdList.model.manager.UserManager;
 
-
+/**
+ * Request scoped managed bean
+ * Responsible for updating birdList in view
+ * Additional functions to be implemented
+ * @author Beatrice
+ * @since 1.0
+ *
+ */
 @RequestScoped
 @Named
 public class BirdTableHandler {
@@ -20,6 +27,10 @@ public class BirdTableHandler {
 	@Inject
 	private UserManager userManager;
 
+	/**
+	 * Gets users list of birds
+	 * @return
+	 */
 	public List<Bird> getListOfBirds() {
 		System.out.println("Getting listOFBirds in birdTableHandler");
 		return userManager.getCurrentUser().getCurrentBirdList().getListOfBirds();	
