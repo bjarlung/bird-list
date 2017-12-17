@@ -58,7 +58,7 @@ public class BirdListManager implements Serializable {
 			birdList.setBirdListName(listName);
 			currentUser.getBirdListCollection().add(birdList);
 			birdersRepo.updateUserLists(currentUser);		
-			return "profile";
+			return "profile?faces-redirect=true";
 		} else {
 			setNotLoggedIn();	
 			return "index";
@@ -111,7 +111,7 @@ public class BirdListManager implements Serializable {
 			} else {
 				System.out.println("in adding Bird, BirdListManager, no list found");
 			}
-			return "profile";
+			return "profile?faces-redirect=true";
 		} else {
 			setNotLoggedIn();	
 			return "index";

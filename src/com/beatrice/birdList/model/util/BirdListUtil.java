@@ -24,22 +24,22 @@ public class BirdListUtil {
 		//TODO get from list
 		Bird bird = new Bird();
 		bird.setId("1");
-		bird.setName("swan");
+		bird.setName("knölsvan");
 		swedenBirdList.add(bird); 
 	
 		bird = new Bird();
 		bird.setId("2");
-		bird.setName("sparrow");
+		bird.setName("gråsparv");
 		swedenBirdList.add(bird);
 		
 		bird = new Bird();
 		bird.setId("3");
-		bird.setName("robin");
+		bird.setName("rödhake");
 		swedenBirdList.add(bird);
 		
 		bird = new Bird();
 		bird.setId("4");
-		bird.setName("eagle");
+		bird.setName("havsörn");
 		swedenBirdList.add(bird);
 		
 		return swedenBirdList;
