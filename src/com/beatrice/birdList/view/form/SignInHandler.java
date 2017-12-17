@@ -7,7 +7,14 @@ import javax.inject.Named;
 
 import com.beatrice.birdList.model.manager.UserManager;
 
-
+/**
+ * Request scoped managed bean
+ * Handles data from index/login page
+ * Code partly written in class, Jensen education
+ * @author Beatrice
+ * @since 1.0
+ *
+ */
 @RequestScoped
 @Named
 public class SignInHandler {
@@ -17,8 +24,11 @@ public class SignInHandler {
 	@Inject
 	private UserManager userManager;
 	
+	/**
+	 * Sends input data to userManager to be validated
+	 * @return address redirect
+	 */
 	public String submit() {
-		System.out.println("in submit,signInHandler username: " + username + " Password: " + password) ;
 		return userManager.signIn(username, password);
 	}
 

@@ -29,12 +29,12 @@
 		styleClass="table" 
 		headerClass="table-header" 
 		rowClasses="table-odd-row, table-even-row">
-		<h:column>
+		<!-- <h:column>
 			<f:facet name="header">Kryssad</f:facet>
 			<p:selectBooleanCheckbox value="#{birdTableHandler.selectedBird}" valueChangeListener="birdTableHandler.toggleSeen}">
 				<p:ajax value="#{bird}" listener="#{birdTableHandler.selectedBird}" update="birdTable"/>
 			</p:selectBooleanCheckbox>
-		</h:column>
+		</h:column> -->
 		<h:column>
 			<f:facet name="header">Fågel</f:facet>
 			#{bird.name}
@@ -44,12 +44,12 @@
 			#{bird.spotted}
 		</h:column>
 		<h:column>
-			<f:facet name="header">Datum</f:facet>
-			#{bird.date.toString()}
+			<f:facet name="header">Kommentar</f:facet>
+			#{bird.comment}
 		</h:column>	
 		<h:column>
 			<f:facet name="header">Ändra</f:facet>
-			<h:commandLink value="Uppdatera" action="#{birdListManager.loadBird(bird.name)}"></h:commandLink>
+			<h:commandLink value="Uppdatera" action="#{editBirdHandler.loadBird(bird)}"></h:commandLink>
 		</h:column>
 	</h:dataTable>
 	</h:form>

@@ -5,11 +5,13 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- * <h1> JDBCUtil </h1>
- * Connects to database. Singleton class
+ * JDBCUtil, handles connection to mySQL database
+ * Singleton class
  * @author Beatrice
+ * @since 1.0
  *
  */
+
 public class JDBCUtil {
 	private Connection connection;
 	private static JDBCUtil instance;

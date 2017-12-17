@@ -1,23 +1,20 @@
 package com.beatrice.birdList.model.beans;
 
-import java.io.Serializable;
 
 import java.util.LinkedList;
 import java.util.List;
-
-import javax.enterprise.context.SessionScoped;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
-
-@SessionScoped
+/**
+ * Represents a user,
+ * containing a list of BirdList-objects and user data
+ * @author Beatrice
+ * @since 1.0
+ *
+ */
 @XmlRootElement
-public class User implements Serializable {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 3104055580743760714L;
+public class User  {
 	
 	private int userId;
 	private String username;
@@ -25,6 +22,9 @@ public class User implements Serializable {
 	private String lastName;
 	private List<BirdList> birdListCollection;
 	
+	/**
+	 * Creates a new user, instantiating birdListCollection
+	 */
 	public User() {
 		System.out.println("Creating new user, user constructor");
 		birdListCollection = new LinkedList<>();
@@ -62,6 +62,10 @@ public class User implements Serializable {
 		this.lastName = lastName;
 	}
 
+	/**
+	 * Temporary method to get the last of the users birdLists 
+	 * @return BirdList, the last of the users birdLists
+	 */
 	public BirdList getCurrentBirdList() {
 		if(birdListCollection.size() > 0) {
 			return birdListCollection.get(birdListCollection.size()-1);

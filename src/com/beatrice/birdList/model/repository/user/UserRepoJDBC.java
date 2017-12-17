@@ -9,9 +9,16 @@ import java.sql.SQLException;
 import com.beatrice.birdList.model.beans.User;
 import com.beatrice.birdList.model.database.JDBCUtil;
 
+/**
+ * Implements UserRepository interface.
+ * Handles communication with mySQL database
+ * @author Beatrice
+ * @since 1.0
+ *
+ */
 public class UserRepoJDBC implements UserRepository, Serializable {
 	/**
-	 * 
+	 * serial version number for serialization
 	 */
 	private static final long serialVersionUID = 4178708225716614174L;
 	private Connection connection = JDBCUtil.getInstance().getConnection();
