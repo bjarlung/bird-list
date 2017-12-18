@@ -28,7 +28,7 @@ JavaEE school project. Birder list web page for users to create, save and update
 ## Technologies / Frameworks
 
 * Java 8
-* Maven 4.0.0
+* Maven 3.5.2
 * JSF
 * Primefaces 6.0
 * JDBC, mysql connector 5.1.6
